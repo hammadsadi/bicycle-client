@@ -1,6 +1,7 @@
 import MyButton from "../../components/Shared/MyButton/MyButton";
 import MyContainer from "../../components/Shared/MyContainer/MyContainer";
 import loginImage from "../../assets/images/loginimage.jpg";
+import { Link } from "react-router-dom";
 const Login = () => {
   return (
     <MyContainer>
@@ -80,6 +81,15 @@ const Login = () => {
                   <MyButton title="sign in" />
                 </div>
               </form>
+              <p className="text-xs text-center mt-3 text-secondary">
+                Dont Have an Account ?{" "}
+                <Link
+                  to="/sign-up"
+                  className="font-semibold hover:underline text-primary"
+                >
+                  Sign Up
+                </Link>
+              </p>
             </div>
           </main>
         </div>
