@@ -5,6 +5,9 @@ import { motion, AnimatePresence } from "framer-motion";
 const Navbar = () => {
   const [dashboardMenuOpen, setDashboardMenuOpen] = useState(false);
   const dashboardMenuRef = useRef<HTMLDivElement | null>(null);
+  const [isFixed, setIsFixed] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [isHidden, setIsHidden] = useState(false);
 
   // Handle Out Side Click
   useEffect(() => {
@@ -21,8 +24,34 @@ const Navbar = () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setIsFixed(true);
+      } else {
+        setIsFixed(false);
+      }
+
+      if (window.scrollY > lastScrollY && window.scrollY > 100) {
+        setIsHidden(true);
+      } else {
+        setIsHidden(false);
+      }
+      setLastScrollY(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [lastScrollY]);
+
   return (
-    <header className="bg-white border-b">
+    <header
+      className={`bg-white border-b w-full z-50 transition-all duration-300 ${
+        isFixed ? "fixed top-0" : "relative"
+      } ${isHidden ? "-top-16" : "top-0"}`}
+    >
       <MyContainer>
         <div className="flex h-16 items-center justify-between">
           <div className="flex-1 md:flex md:items-center md:gap-12">
@@ -35,7 +64,7 @@ const Navbar = () => {
           <div className="md:flex md:items-center md:gap-12">
             <nav aria-label="Global" className="hidden md:flex gap-2">
               <ul className="flex items-center gap-6 text-sm">
-                <NavBarLinks title="All Bicycles" dLink="/all-bicycle" />
+                <NavBarLinks title="All Bicycles" dLink="/bicycles" />
                 <NavBarLinks title="About" dLink="/about" />
               </ul>
               <button className="bg-primary py-1 px-2 text-sm text-white rounded">
