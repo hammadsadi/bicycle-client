@@ -6,6 +6,12 @@ import Home from "../pages/Home/Home";
 import Bicycles from "../pages/Bicycles/Bicycles";
 import BiCycleDetails from "../pages/BiCycleDetails/BiCycleDetails";
 import About from "../pages/About/About";
+import DashboardLayout from "../components/Layouts/DashboardLayout";
+import Profile from "../pages/Dashboard/Profile/Profile";
+import UserManage from "../pages/Dashboard/Admin/UserManage/UserManage";
+import ProductManage from "../pages/Dashboard/Admin/ManageProduct/ManageProduct";
+import OrderManage from "../pages/Dashboard/Admin/ManageOrder/ManageOrder";
+import MyOrders from "../pages/Dashboard/User/MyOrders/MyOrders";
 
 const route = createBrowserRouter([
   {
@@ -27,6 +33,33 @@ const route = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout />,
+    children: [
+      // User
+      {
+        path: "my-orders",
+        element: <MyOrders />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
+      },
+      {
+        path: "user-manage",
+        element: <UserManage />,
+      },
+      {
+        path: "product-manage",
+        element: <ProductManage />,
+      },
+      {
+        path: "order-manage",
+        element: <OrderManage />,
       },
     ],
   },

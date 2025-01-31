@@ -2,7 +2,39 @@ import MyButton from "../../components/Shared/MyButton/MyButton";
 import MyContainer from "../../components/Shared/MyContainer/MyContainer";
 import loginImage from "../../assets/images/loginimage.jpg";
 import { Link } from "react-router-dom";
+import { FormEvent } from "react";
+import getInputValue from "../../utils/getnputValue";
+import { useLoginMutation } from "../../redux/features/auth/AuthApi";
+import { toast } from "sonner";
+interface ILogin {
+  email: string;
+  password: string;
+}
 const Login = () => {
+  const [loginUser, { error, data }] = useLoginMutation();
+  const handleLogin = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    // const form = event.target as HTMLFormElement;
+    // const emailInput = form?.elements.namedItem("email") as HTMLInputElement;
+    // const passwordInput = form?.elements.namedItem(
+    //   "password"
+    // ) as HTMLInputElement;
+    const userInfo: ILogin = {
+      email: getInputValue({ targetEvent: event, fieldName: "email" }),
+      password: getInputValue({ targetEvent: event, fieldName: "password" }),
+    };
+    const res = await loginUser(userInfo);
+    if (res?.error) {
+      console.log("err", res.error);
+    }
+    if (res.data) {
+      toast.success(res?.data?.message, {i})
+      console.log("data", res.data);
+    }
+    // Set Token on Local Storage
+    localStorage.setItem("token", res?.data?.data);
+  };
+
   return (
     <MyContainer>
       <section className="bg-white flex justify-center items-center h-screen">
@@ -46,7 +78,7 @@ const Login = () => {
               Login Your Account
             </h2>
             <div className="w-full">
-              <form action="#" className="space-y-2">
+              <form onSubmit={handleLogin} className="space-y-2">
                 <div className="w-full">
                   <label
                     htmlFor="Email"
