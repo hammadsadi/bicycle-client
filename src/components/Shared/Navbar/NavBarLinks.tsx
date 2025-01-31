@@ -4,7 +4,7 @@ const NavBarLinks = ({ title, dLink }: { title: string; dLink: string }) => {
   return (
     <li>
       <Link
-        className="text-gray-500 transition hover:text-gray-500/75"
+        className="text-secondary font-inter font-semibold transition hover:text-primary text-sm"
         to={dLink}
       >
         {title}

@@ -58,7 +58,7 @@ const Navbar = () => {
         <div className="flex h-16 items-center justify-between">
           <div className="flex-1 md:flex md:items-center md:gap-12">
             <Link
-              className=" text-teal-600 font-orbitron font-bold flex items-center"
+              className=" text-primary font-orbitron font-bold flex items-center uppercase"
               to="/"
             >
               <IoIosBicycle className="md:text-4xl text-base font-bold" />
@@ -133,7 +133,7 @@ const Navbar = () => {
                       <form method="POST" action="#">
                         <button
                           type="submit"
-                          className="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
+                          className="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-secondary hover:bg-primary hover:text-white"
                           role="menuitem"
                         >
                           <svg

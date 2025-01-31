@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import FeaturesBicycleItem from "../../components/Home/FeaturesBicycleItem";
 import MyContainer from "../../components/Shared/MyContainer/MyContainer";
 import MySection from "../../components/Shared/MySection/MySection";
@@ -18,9 +19,12 @@ const Features = () => {
             <FeaturesBicycleItem />
           </div>
           <div className="mt-2 flex justify-center items-center md:mt-4">
-            <button className="bg-primary active:bg-primary uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150">
+            <Link
+              to="/bicycles"
+              className="bg-primary active:bg-primary uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
+            >
               View All
-            </button>
+            </Link>
           </div>
         </MySection>
       </MyContainer>
