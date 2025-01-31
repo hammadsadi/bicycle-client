@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import MyContainer from "../MyContainer/MyContainer";
 import NavBarLinks from "./NavBarLinks";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
+import { IoIosBicycle } from "react-icons/io";
 const Navbar = () => {
   const [dashboardMenuOpen, setDashboardMenuOpen] = useState(false);
   const dashboardMenuRef = useRef<HTMLDivElement | null>(null);
@@ -55,10 +57,13 @@ const Navbar = () => {
       <MyContainer>
         <div className="flex h-16 items-center justify-between">
           <div className="flex-1 md:flex md:items-center md:gap-12">
-            <a className="block text-teal-600" href="#">
-              <span className="sr-only">Home</span>
-              Logo
-            </a>
+            <Link
+              className=" text-teal-600 font-orbitron font-bold flex items-center"
+              to="/"
+            >
+              <IoIosBicycle className="md:text-4xl text-base font-bold" />
+              Cycle Haven
+            </Link>
           </div>
 
           <div className="md:flex md:items-center md:gap-12">
@@ -67,7 +72,7 @@ const Navbar = () => {
                 <NavBarLinks title="All Bicycles" dLink="/bicycles" />
                 <NavBarLinks title="About" dLink="/about" />
               </ul>
-              <button className="bg-primary py-1 px-2 text-sm text-white rounded">
+              <button className="bg-primary active:bg-primary uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150">
                 Login
               </button>
             </nav>
@@ -99,29 +104,29 @@ const Navbar = () => {
                     role="menu"
                   >
                     <div className="p-2">
-                      <a
-                        href="#"
-                        className="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+                      <Link
+                        to="/dashboard"
+                        className="block rounded-lg px-4 py-2 text-sm text-secondary hover:bg-primary hover:text-white"
                         role="menuitem"
                       >
-                        My profile
-                      </a>
+                        Dashboard
+                      </Link>
 
-                      <a
-                        href="#"
-                        className="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+                      <Link
+                        to="dashboard/my-orders"
+                        className="block rounded-lg px-4 py-2 text-sm text-secondary hover:bg-primary hover:text-white"
                         role="menuitem"
                       >
-                        Billing summary
-                      </a>
+                        My Orders
+                      </Link>
 
-                      <a
-                        href="#"
-                        className="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+                      <Link
+                        to="dashboard/profile"
+                        className="block rounded-lg px-4 py-2 text-sm text-secondary hover:bg-primary hover:text-white"
                         role="menuitem"
                       >
-                        Team settings
-                      </a>
+                        Profile settings
+                      </Link>
                     </div>
 
                     <div className="p-2">

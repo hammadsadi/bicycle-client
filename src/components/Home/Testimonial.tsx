@@ -10,8 +10,8 @@ const Testimonial = () => {
           <MySection>
             <div className="">
               <SectionHeading
-                title="Testimonial"
-                subTitle="What say about me"
+                title="Client Feedback"
+                subTitle="What they say"
               />
               <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-8">
                 <blockquote className="rounded-lg bg-gray-50 p-6 shadow-sm sm:p-8">
