@@ -1,7 +1,45 @@
+import { FormEvent } from "react";
 import MyButton from "../../components/Shared/MyButton/MyButton";
 import MyContainer from "../../components/Shared/MyContainer/MyContainer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import getInputValue from "../../utils/getnputValue";
+import { toast } from "sonner";
+import { useUserCreateMutation } from "../../redux/features/auth/AuthApi";
 const Signup = () => {
+  const [createUser] = useUserCreateMutation();
+  const navigate = useNavigate();
+  const handleSignup = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const toastId = toast.loading("Please Wait...");
+    const name = getInputValue({ targetEvent: event, fieldName: "name" });
+    const email = getInputValue({ targetEvent: event, fieldName: "email" });
+    const password = getInputValue({
+      targetEvent: event,
+      fieldName: "password",
+    });
+    const phone = getInputValue({ targetEvent: event, fieldName: "phone" });
+    const address = getInputValue({ targetEvent: event, fieldName: "address" });
+    const city = getInputValue({ targetEvent: event, fieldName: "city" });
+    if (!name || !email || !phone) {
+      return toast.error("All Fields are Required", { id: toastId });
+    }
+    const userInfo = {
+      name,
+      email,
+      password,
+      phone,
+      address,
+      city,
+    };
+    const res = await createUser(userInfo);
+    if (res?.data) {
+      toast.success(res?.data?.message, { id: toastId });
+      navigate("/login");
+    } else {
+      toast.error("Something Wrong", { id: toastId });
+    }
+  };
   return (
     <MyContainer>
       <section className="flex flex-row justify-center w-full min-h-screen items-center">
@@ -10,7 +48,7 @@ const Signup = () => {
             <h2 className="font-bold text-2xl lg:text-3xl text-center mb-5">
               Create Account
             </h2>
-            <form action="#" className="space-y-2">
+            <form onSubmit={handleSignup} className="space-y-2">
               <div className="w-full">
                 <label
                   htmlFor="Name"
@@ -102,7 +140,7 @@ const Signup = () => {
                 />
               </div>
               <div className=" sm:flex sm:items-center">
-                <MyButton title="sign in" />
+                <MyButton title="Sign Up" />
               </div>
             </form>
             <p className="text-xs text-center mt-3 text-secondary">

@@ -8,10 +8,11 @@ import { IoIosBicycle } from "react-icons/io";
 import { FaUsers } from "react-icons/fa";
 import { FaProductHunt } from "react-icons/fa";
 import { MdShoppingCartCheckout } from "react-icons/md";
+import useGetRole from "../../../hooks/useGetRole";
 
 const Sidebar = () => {
   const [isActive, setActive] = useState(false);
-  //   const [role, setRole] = useState<UserRole | undefined>(undefined);
+  const { userRole } = useGetRole();
 
   // Sidebar Responsive Handler
   const handleToggle = () => {
@@ -73,55 +74,64 @@ const Sidebar = () => {
             <nav>
               <div>
                 {/*Admin Area*/}
-                <NavLink
-                  to="user-manage"
-                  className={({ isActive }) =>
-                    `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-primary   hover:text-white ${
-                      isActive ? "bg-primary  text-white" : "text-gray-600"
-                    }`
-                  }
-                >
-                  <FaUsers className="w-5 h-5" />
+                {userRole === "admin" && (
+                  <>
+                    <NavLink
+                      to="user-manage"
+                      className={({ isActive }) =>
+                        `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-primary   hover:text-white ${
+                          isActive ? "bg-primary  text-white" : "text-gray-600"
+                        }`
+                      }
+                    >
+                      <FaUsers className="w-5 h-5" />
 
-                  <span className="mx-4 font-medium">Manage Users</span>
-                </NavLink>
-                <NavLink
-                  to="product-manage"
-                  className={({ isActive }) =>
-                    `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-primary   hover:text-white ${
-                      isActive ? "bg-primary  text-white" : "text-gray-600"
-                    }`
-                  }
-                >
-                  <FaProductHunt className="w-5 h-5" />
+                      <span className="mx-4 font-medium">Manage Users</span>
+                    </NavLink>
+                    <NavLink
+                      to="product-manage"
+                      className={({ isActive }) =>
+                        `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-primary   hover:text-white ${
+                          isActive ? "bg-primary  text-white" : "text-gray-600"
+                        }`
+                      }
+                    >
+                      <FaProductHunt className="w-5 h-5" />
 
-                  <span className="mx-4 font-medium">Manage Porduct</span>
-                </NavLink>
-                <NavLink
-                  to="order-manage"
-                  className={({ isActive }) =>
-                    `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-primary   hover:text-white ${
-                      isActive ? "bg-primary  text-white" : "text-gray-600"
-                    }`
-                  }
-                >
-                  <MdShoppingCartCheckout className="w-5 h-5" />
+                      <span className="mx-4 font-medium">Manage Porduct</span>
+                    </NavLink>
+                    <NavLink
+                      to="order-manage"
+                      className={({ isActive }) =>
+                        `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-primary   hover:text-white ${
+                          isActive ? "bg-primary  text-white" : "text-gray-600"
+                        }`
+                      }
+                    >
+                      <MdShoppingCartCheckout className="w-5 h-5" />
 
-                  <span className="mx-4 font-medium">Manage Order</span>
-                </NavLink>
+                      <span className="mx-4 font-medium">Manage Order</span>
+                    </NavLink>
+                  </>
+                )}
+
                 {/* User Area */}
-                <NavLink
-                  to="my-orders"
-                  className={({ isActive }) =>
-                    `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-primary   hover:text-white ${
-                      isActive ? "bg-primary  text-white" : "text-gray-600"
-                    }`
-                  }
-                >
-                  <MdShoppingCartCheckout className="w-5 h-5" />
+                {userRole === "customer" && (
+                  <>
+                    <NavLink
+                      to="my-orders"
+                      className={({ isActive }) =>
+                        `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-primary   hover:text-white ${
+                          isActive ? "bg-primary  text-white" : "text-gray-600"
+                        }`
+                      }
+                    >
+                      <MdShoppingCartCheckout className="w-5 h-5" />
 
-                  <span className="mx-4 font-medium">My Order</span>
-                </NavLink>
+                      <span className="mx-4 font-medium">My Order</span>
+                    </NavLink>
+                  </>
+                )}
               </div>
             </nav>
           </div>
@@ -132,18 +142,21 @@ const Sidebar = () => {
 
           {/* shared */}
           {/* Profile Menu */}
-          <NavLink
-            to="/dashboard/profile"
-            className={({ isActive }) =>
-              `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-primary   hover:text-white ${
-                isActive ? "bg-primary  text-white" : "text-gray-600"
-              }`
-            }
-          >
-            <FcSettings className="w-5 h-5" />
+          {userRole === "customer" && (
+            <NavLink
+              to="/dashboard/profile"
+              className={({ isActive }) =>
+                `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-primary   hover:text-white ${
+                  isActive ? "bg-primary  text-white" : "text-gray-600"
+                }`
+              }
+            >
+              <FcSettings className="w-5 h-5" />
 
-            <span className="mx-4 font-medium">Profile</span>
-          </NavLink>
+              <span className="mx-4 font-medium">Profile</span>
+            </NavLink>
+          )}
+
           <button
             // onClick={handleLogOut}
             className="flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-primary   hover:text-white transition-colors duration-300 transform"

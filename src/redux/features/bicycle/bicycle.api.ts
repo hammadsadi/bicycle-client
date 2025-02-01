@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { baseApi } from "../../api/baseApi";
 
-export const academicFacultyApi = baseApi.injectEndpoints({
+export const bicycleApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     // Get All Bicycle
     getAllBicycle: builder.query({
       query: () => ({
-        url: "/academic-faculties",
+        url: "/bicycle",
         method: "GET",
       }),
       //   transformResponse: (response: TReduxResponse<TAcademicSemester[]>) => {
@@ -14,6 +15,17 @@ export const academicFacultyApi = baseApi.injectEndpoints({
       //       meta: response?.meta,
       //     };
       //   },
+    }),
+    getSingleBicycle: builder.query({
+      query: (arg) => ({
+        url: `/bicycle/${arg}`,
+        method: "GET",
+      }),
+      transformResponse: (response: any) => {
+        return {
+          data: response?.data,
+        };
+      },
     }),
     // Create New Academic Faculty
     // addAcademicFaculty: builder.mutation({
@@ -25,3 +37,5 @@ export const academicFacultyApi = baseApi.injectEndpoints({
     // }),
   }),
 });
+
+export const { useGetAllBicycleQuery, useGetSingleBicycleQuery } = bicycleApi;

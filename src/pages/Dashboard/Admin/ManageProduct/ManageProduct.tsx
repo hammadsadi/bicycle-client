@@ -15,7 +15,7 @@ const ProductManage = () => {
             <tr>
               <TableTh tHeading="Image" />
               <TableTh tHeading=" Name" />
-              <TableTh tHeading="Email" />
+              <TableTh tHeading="Price" />
               <TableTh tHeading="  Action" />
             </tr>
           </thead>

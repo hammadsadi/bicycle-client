@@ -12,6 +12,8 @@ import UserManage from "../pages/Dashboard/Admin/UserManage/UserManage";
 import ProductManage from "../pages/Dashboard/Admin/ManageProduct/ManageProduct";
 import OrderManage from "../pages/Dashboard/Admin/ManageOrder/ManageOrder";
 import MyOrders from "../pages/Dashboard/User/MyOrders/MyOrders";
+import Checkout from "../pages/Checkout/Checkout";
+import ProtecttedRoute from "../components/Layouts/ProtecttedRoute";
 
 const route = createBrowserRouter([
   {
@@ -34,6 +36,14 @@ const route = createBrowserRouter([
         path: "/about",
         element: <About />,
       },
+      {
+        path: "/checkout",
+        element: (
+          <ProtecttedRoute role="customer">
+            <Checkout />
+          </ProtecttedRoute>
+        ),
+      },
     ],
   },
   {
@@ -43,23 +53,45 @@ const route = createBrowserRouter([
       // User
       {
         path: "my-orders",
-        element: <MyOrders />,
+        element: (
+          <ProtecttedRoute role="customer">
+            <MyOrders />
+          </ProtecttedRoute>
+        ),
       },
+
       {
         path: "profile",
-        element: <Profile />,
+        element: (
+          <ProtecttedRoute role="customer">
+            <Profile />
+          </ProtecttedRoute>
+        ),
       },
+
       {
         path: "user-manage",
-        element: <UserManage />,
+        element: (
+          <ProtecttedRoute role="admin">
+            <UserManage />
+          </ProtecttedRoute>
+        ),
       },
       {
         path: "product-manage",
-        element: <ProductManage />,
+        element: (
+          <ProtecttedRoute role="admin">
+            <ProductManage />
+          </ProtecttedRoute>
+        ),
       },
       {
         path: "order-manage",
-        element: <OrderManage />,
+        element: (
+          <ProtecttedRoute role="admin">
+            <OrderManage />
+          </ProtecttedRoute>
+        ),
       },
     ],
   },

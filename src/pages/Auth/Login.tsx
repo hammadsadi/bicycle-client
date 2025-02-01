@@ -1,7 +1,7 @@
 import MyButton from "../../components/Shared/MyButton/MyButton";
 import MyContainer from "../../components/Shared/MyContainer/MyContainer";
 import loginImage from "../../assets/images/loginimage.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FormEvent } from "react";
 import getInputValue from "../../utils/getnputValue";
 import { useLoginMutation } from "../../redux/features/auth/AuthApi";
@@ -11,7 +11,8 @@ interface ILogin {
   password: string;
 }
 const Login = () => {
-  const [loginUser, { error, data }] = useLoginMutation();
+  const [loginUser] = useLoginMutation();
+  const navigate = useNavigate();
   const handleLogin = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // const form = event.target as HTMLFormElement;
@@ -19,16 +20,18 @@ const Login = () => {
     // const passwordInput = form?.elements.namedItem(
     //   "password"
     // ) as HTMLInputElement;
+    const toastId = toast.loading("Please Wait..");
     const userInfo: ILogin = {
       email: getInputValue({ targetEvent: event, fieldName: "email" }),
       password: getInputValue({ targetEvent: event, fieldName: "password" }),
     };
     const res = await loginUser(userInfo);
     if (res?.error) {
-      console.log("err", res.error);
+      return toast.error("Invalid Credentials", { id: toastId });
     }
     if (res.data) {
-      toast.success(res?.data?.message, {i})
+      toast.success(res?.data?.message, { id: toastId });
+      navigate("/");
       console.log("data", res.data);
     }
     // Set Token on Local Storage

@@ -1,7 +1,29 @@
+import { useNavigate, useParams } from "react-router-dom";
 import MyContainer from "../../components/Shared/MyContainer/MyContainer";
 import MySection from "../../components/Shared/MySection/MySection";
+import { useGetSingleBicycleQuery } from "../../redux/features/bicycle/bicycle.api";
+import Loader from "../../components/Loader/Loader";
+import { useAppDispatch } from "../../redux/hooks";
+import { TProduct } from "../../types/bicycle.types";
+import { addProduct } from "../../redux/features/Checkout/Checkout.slice";
 
 const BiCycleDetails = () => {
+  const { id } = useParams();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const {
+    data: singleBicycle,
+    isLoading,
+    isFetching,
+  } = useGetSingleBicycleQuery(id);
+
+  if (isFetching || isLoading) {
+    return <Loader />;
+  }
+  const handleCheckoutProducts = (item: TProduct) => {
+    dispatch(addProduct(item));
+    navigate("/checkout");
+  };
   return (
     <MyContainer>
       <MySection>
@@ -12,19 +34,17 @@ const BiCycleDetails = () => {
                 <div className="h-[460px] rounded-lg bg-gray-300 mb-4">
                   <img
                     className="w-full h-full object-cover"
-                    src="https://cdn.pixabay.com/photo/2020/05/22/17/53/mockup-5206355_960_720.jpg"
+                    src={singleBicycle?.data?.image}
                     alt="Product Image"
                   />
                 </div>
               </div>
               <div className="md:flex-1 p-4 border rounded">
                 <h2 className="text-2xl font-bold text-secondary mb-2">
-                  Product Name
+                  {singleBicycle?.data?.name}
                 </h2>
                 <p className="text-secondary text-sm mb-4">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                  sed ante justo. Integer euismod libero id mauris malesuada
-                  tincidunt.
+                  {singleBicycle?.data?.productDetails}
                 </p>
 
                 <div className="flex mb-4">
@@ -34,7 +54,7 @@ const BiCycleDetails = () => {
                         Brand:
                       </span>{" "}
                       <span className="text-secondary text-sm font-inter font-semibold hover:text-primary">
-                        Sadi Brand
+                        {singleBicycle?.data?.brand}
                       </span>
                     </p>
                     <p>
@@ -42,7 +62,7 @@ const BiCycleDetails = () => {
                         Model:
                       </span>{" "}
                       <span className="text-secondary text-sm font-inter font-semibold hover:text-primary">
-                        Sadi Brand
+                        {singleBicycle?.data?.model}
                       </span>
                     </p>
                     <p>
@@ -50,29 +70,44 @@ const BiCycleDetails = () => {
                         Category:
                       </span>{" "}
                       <span className="text-secondary text-sm font-inter font-semibold hover:text-primary">
-                        Sadi Brand
+                        {singleBicycle?.data?.category}
                       </span>
                     </p>
                     <p>
                       <span className="font-inter font-normal text-sm text-gray-700">
                         Availability:
-                      </span>{" "}
-                      <span className="text-secondary text-sm font-inter font-semibold hover:text-primary">
-                        In Stock
                       </span>
+                      {!singleBicycle?.data?.stock ||
+                      singleBicycle?.data?.stock === 0 ? (
+                        <span className=" text-sm font-inter font-semibold text-rose-600">
+                          Out Of Stock
+                        </span>
+                      ) : (
+                        <span className=" text-sm font-inter font-semibold text-primary">
+                          In Stock
+                        </span>
+                      )}
                     </p>
                   </div>
                 </div>
                 <div className="flex mb-4">
                   <div className="text-lg md:mr-4 md:text-2xl">
                     <span className="font-bold text-secondary">Price:</span>
-                    <span className="text-secondary"> 29BDT</span>
+                    <span className="text-secondary">
+                      {" "}
+                      {singleBicycle?.data?.price}BDT
+                    </span>
                   </div>
                 </div>
                 <div className="flex -mx-2 mb-4">
                   <div className="w-1/2 px-2">
-                    <button className="w-full bg-primary text-white py-2 px-4 rounded-full font-bold">
-                      Add to Cart
+                    <button
+                      onClick={() =>
+                        handleCheckoutProducts(singleBicycle?.data)
+                      }
+                      className="w-full bg-primary text-white py-2 px-4 rounded-full font-bold"
+                    >
+                      Buy Now
                     </button>
                   </div>
                 </div>

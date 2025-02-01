@@ -1,8 +1,20 @@
 import BicycleCard from "../../components/Bicycle/BicycleCard";
+import Loader from "../../components/Loader/Loader";
 import MyContainer from "../../components/Shared/MyContainer/MyContainer";
 import MySection from "../../components/Shared/MySection/MySection";
+import { useGetAllBicycleQuery } from "../../redux/features/bicycle/bicycle.api";
+import { TProduct } from "../../types/bicycle.types";
 
 const Bicycles = () => {
+  const {
+    data: bicycleData,
+    isLoading,
+    isFetching,
+  } = useGetAllBicycleQuery(undefined);
+
+  if (isLoading || isFetching) {
+    return <Loader />;
+  }
   return (
     <div>
       {/* Small Banner */}
@@ -60,11 +72,9 @@ const Bicycles = () => {
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4 lg:gap-5">
-            <BicycleCard />
-            <BicycleCard />
-            <BicycleCard />
-            <BicycleCard />
-            <BicycleCard />
+            {bicycleData?.data?.map((item: TProduct) => (
+              <BicycleCard key={item._id} item={item} />
+            ))}
           </div>
         </MySection>
       </MyContainer>

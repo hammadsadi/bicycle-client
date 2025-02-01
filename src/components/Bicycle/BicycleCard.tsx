@@ -1,17 +1,28 @@
 import { Link } from "react-router-dom";
+import { TProduct } from "../../types/bicycle.types";
 
-const BicycleCard = () => {
+const BicycleCard = ({ item }: { item: TProduct }) => {
+  console.log(item);
   return (
-    <a
-      href="#"
+    <Link
+      to={`/bicycle/${item?._id}`}
       className="relative block rounded-tr-3xl border border-gray-100"
     >
-      <span className="absolute -right-px -top-px rounded-bl-3xl rounded-tr-3xl bg-rose-600 px-4 py-2 font-medium uppercase text-xs tracking-widest text-white">
+      {item.stock > 0 ? (
+        <span className="absolute -right-px -top-px rounded-bl-3xl rounded-tr-3xl bg-primary px-4 py-2 font-medium uppercase text-xs tracking-widest text-white">
+          In Stock
+        </span>
+      ) : (
+        <span className="absolute -right-px -top-px rounded-bl-3xl rounded-tr-3xl bg-rose-600 px-4 py-2 font-medium uppercase text-xs tracking-widest text-white">
+          Out of Stock
+        </span>
+      )}
+      {/* <span className="absolute -right-px -top-px rounded-bl-3xl rounded-tr-3xl bg-rose-600 px-4 py-2 font-medium uppercase text-xs tracking-widest text-white">
         Out of Stock
-      </span>
+      </span> */}
 
       <img
-        src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=2672&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        src={item?.image}
         alt=""
         className="h-80 w-full rounded-tr-3xl object-cover"
       />
@@ -21,11 +32,11 @@ const BicycleCard = () => {
           <div className="flex justify-start items-center gap-1">
             <span className="inline-block w-4 h-[1px] bg-gray-500/45"></span>
             <p className="text-gray-700 font-inter font-normal text-xs uppercase ">
-              Category
+              {item?.category}
             </p>
           </div>
           <h2 className="font-orbitron font-bold text-lg md:text-xl uppercase mt-2 text-secondary hover:text-primary">
-            Lorem, ipsum.
+            {item?.name}
           </h2>
         </div>
         {/* Detgails */}
@@ -36,7 +47,7 @@ const BicycleCard = () => {
                 Brand:
               </span>{" "}
               <span className="text-secondary text-sm font-inter font-semibold hover:text-primary">
-                Sadi Brand
+                {item?.brand}
               </span>
             </p>
             <p>
@@ -44,23 +55,23 @@ const BicycleCard = () => {
                 Model:
               </span>{" "}
               <span className="text-secondary text-sm font-inter font-semibold hover:text-primary">
-                Sadi Brand
+                {item?.model}
               </span>
             </p>
           </div>
           <h2 className="text-lg md:text-xl mt-3 font-sans">
             <span className="">Price</span>{" "}
-            <span className="font-bold">100BDT</span>
+            <span className="font-bold">{item?.price}BDT</span>
           </h2>
         </div>
 
-        <Link to="/bicycle/sasdasfd">
+        <Link to={`/bicycle/${item?._id}`}>
           <button className="font-orbitron w-full mt-4 block rounded-md border border-primary bg-primary px-5 py-3 text-sm font-medium uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-primary">
             View Details
           </button>
         </Link>
       </div>
-    </a>
+    </Link>
   );
 };
 
