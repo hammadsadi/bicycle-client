@@ -7,6 +7,8 @@ import { IoIosBicycle } from "react-icons/io";
 import useGetRole from "../../../hooks/useGetRole";
 import { useLogedinUserGetQuery } from "../../../redux/features/auth/AuthApi";
 import Loader from "../../Loader/Loader";
+import { useAppDispatch } from "../../../redux/hooks";
+import { logoutUser } from "../../../redux/features/auth/auth.slice";
 
 const Navbar = () => {
   const [dashboardMenuOpen, setDashboardMenuOpen] = useState(false);
@@ -16,6 +18,7 @@ const Navbar = () => {
   const [isHidden, setIsHidden] = useState(false);
   const [showMibileMenu, setShowMobileMenu] = useState(false);
   const { userRole } = useGetRole();
+  const dispatch = useAppDispatch();
   const {
     data: meInfo,
     isFetching,
@@ -58,6 +61,11 @@ const Navbar = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [lastScrollY]);
+
+  // Handle User Logout
+  const handleLogout = () => {
+    dispatch(logoutUser());
+  };
 
   if (isFetching || isLoading) {
     return <Loader />;
@@ -162,16 +170,24 @@ const Navbar = () => {
                       role="menu"
                     >
                       <div className="p-2">
-                        <Link
-                          to="/dashboard"
-                          className="block rounded-lg px-4 py-2 text-sm text-secondary hover:bg-primary hover:text-white"
-                          role="menuitem"
-                        >
-                          Dashboard
-                        </Link>
-
+                        {userRole === "admin" && (
+                          <Link
+                            to="/dashboard/user-manage"
+                            className="block rounded-lg px-4 py-2 text-sm text-secondary hover:bg-primary hover:text-white"
+                            role="menuitem"
+                          >
+                            Dashboard
+                          </Link>
+                        )}
                         {userRole === "customer" && (
                           <>
+                            <Link
+                              to="/dashboard/my-orders"
+                              className="block rounded-lg px-4 py-2 text-sm text-secondary hover:bg-primary hover:text-white"
+                              role="menuitem"
+                            >
+                              Dashboard
+                            </Link>
                             <Link
                               to="dashboard/my-orders"
                               className="block rounded-lg px-4 py-2 text-sm text-secondary hover:bg-primary hover:text-white"
@@ -191,9 +207,9 @@ const Navbar = () => {
                       </div>
 
                       <div className="p-2">
-                        <form method="POST" action="#">
+                        <div>
                           <button
-                            type="submit"
+                            onClick={handleLogout}
                             className="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-secondary hover:bg-primary hover:text-white"
                             role="menuitem"
                           >
@@ -213,7 +229,7 @@ const Navbar = () => {
                             </svg>
                             Logout
                           </button>
-                        </form>
+                        </div>
                       </div>
                     </motion.div>
                   )}

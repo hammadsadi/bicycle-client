@@ -2,21 +2,29 @@ import { useState } from "react";
 import { AiOutlineBars } from "react-icons/ai";
 import { FcSettings } from "react-icons/fc";
 import { GrLogout } from "react-icons/gr";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { IoIosBicycle } from "react-icons/io";
 import { FaUsers } from "react-icons/fa";
 import { FaProductHunt } from "react-icons/fa";
 import { MdShoppingCartCheckout } from "react-icons/md";
 import useGetRole from "../../../hooks/useGetRole";
+import { useAppDispatch } from "../../../redux/hooks";
+import { logoutUser } from "../../../redux/features/auth/auth.slice";
 
 const Sidebar = () => {
   const [isActive, setActive] = useState(false);
+  const navigate = useNavigate();
   const { userRole } = useGetRole();
-
+  const dispatch = useAppDispatch();
   // Sidebar Responsive Handler
   const handleToggle = () => {
     setActive(!isActive);
+  };
+  // Handle User Logout
+  const handleLogout = () => {
+    dispatch(logoutUser());
+    navigate("/login");
   };
   return (
     <>
@@ -158,7 +166,7 @@ const Sidebar = () => {
           )}
 
           <button
-            // onClick={handleLogOut}
+            onClick={handleLogout}
             className="flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-primary   hover:text-white transition-colors duration-300 transform"
           >
             <GrLogout className="w-5 h-5" />

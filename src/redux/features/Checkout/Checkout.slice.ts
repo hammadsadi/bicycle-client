@@ -1,36 +1,72 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { TProduct } from "../../../types/bicycle.types";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type TInitialState = {
-  products: { product: string; quantity: number }[];
-  checkoutProducts: TProduct[];
+export interface ICartItem {
+  product: string; // Product ID
+  name: string;
+  price: number;
+  quantity: number;
+  stock: number;
+  imageUrl: string; // Optional: for displaying in the UI
+}
+
+interface CartState {
+  items: ICartItem[];
+  totalQuantity: number;
   totalPrice: number;
-};
-const initialState: TInitialState = {
-  products: [],
-  checkoutProducts: [],
+}
+
+const initialState: CartState = {
+  items: [],
+  totalQuantity: 0,
   totalPrice: 0,
 };
 const checkoutSlice = createSlice({
   name: "checkout",
   initialState,
   reducers: {
-    addProduct: (state, action) => {
-      const isExistProduct = state.products.find(
-        (prod) => prod.product === action.payload._id
+    addToCart(state, action: PayloadAction<ICartItem>) {
+      const existingItem = state.items.find(
+        (item) => item.product === action.payload.product
       );
-      if (isExistProduct) {
-        state.totalPrice += action.payload.price;
-        isExistProduct.quantity += 1;
+      if (existingItem) {
+        existingItem.quantity += action.payload.quantity;
       } else {
-        state.totalPrice += action.payload.price;
-        state.products.push({ product: action.payload._id, quantity: 1 });
-        state.checkoutProducts.push(action.payload);
+        state.items.push(action.payload);
       }
+      state.totalQuantity += action.payload.quantity;
+      state.totalPrice += action.payload.price * action.payload.quantity;
+    },
+    removeFromCart(state, action: PayloadAction<string>) {
+      const itemId = action.payload;
+      const existingItem = state.items.find((item) => item.product === itemId);
+      if (existingItem) {
+        state.totalQuantity -= existingItem.quantity;
+        state.totalPrice -= existingItem.price * existingItem.quantity;
+        state.items = state.items.filter((item) => item.product !== itemId);
+      }
+    },
+    updateQuantity(
+      state,
+      action: PayloadAction<{ id: string; quantity: number }>
+    ) {
+      const { id, quantity } = action.payload;
+      const existingItem = state.items.find((item) => item.product === id);
+      if (existingItem && quantity > 0) {
+        const quantityDifference = quantity - existingItem.quantity;
+        existingItem.quantity = quantity;
+        state.totalQuantity += quantityDifference;
+        state.totalPrice += quantityDifference * existingItem.price;
+      }
+    },
+    clearCart(state) {
+      state.items = [];
+      state.totalQuantity = 0;
+      state.totalPrice = 0;
     },
   },
 });
 
-export const { addProduct } = checkoutSlice.actions;
+export const { addToCart, updateQuantity, clearCart, removeFromCart } =
+  checkoutSlice.actions;
 
 export default checkoutSlice.reducer;

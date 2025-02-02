@@ -1,15 +1,48 @@
+import { useEffect } from "react";
 import MyContainer from "../../components/Shared/MyContainer/MyContainer";
 import MySection from "../../components/Shared/MySection/MySection";
 import { useLogedinUserGetQuery } from "../../redux/features/auth/AuthApi";
-import { useAppSelector } from "../../redux/hooks";
-import { TProduct } from "../../types/bicycle.types";
+import {
+  removeFromCart,
+  updateQuantity,
+} from "../../redux/features/Checkout/Checkout.slice";
+import { useCreateOrderMutation } from "../../redux/features/Checkout/checkoutApi";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { toast } from "sonner";
 
 const Checkout = () => {
-  const { checkoutProducts, totalPrice, products } = useAppSelector(
-    (state) => state.checkouts
-  );
+  const { items, totalPrice } = useAppSelector((state) => state.checkouts);
   const { data: me } = useLogedinUserGetQuery(undefined);
-  // console.log("insight Checkout", checkoutProducts);
+  const [createOrder, { data, isLoading, isSuccess, isError, error }] =
+    useCreateOrderMutation();
+  const dispatch = useAppDispatch();
+  const dta = items?.map((data) => {
+    return {
+      product: data?.product,
+      quantity: data.quantity,
+    };
+  });
+  const handlePlaceOrder = async () => {
+    await createOrder({ products: dta });
+
+    // console.log("api Res", res?.data?.data);
+  };
+
+  const toastId = "paymentToast";
+  useEffect(() => {
+    if (isLoading) toast.loading("Processing ...", { id: toastId });
+
+    if (isSuccess) {
+      toast.success(data?.message, { id: toastId });
+      if (data?.data) {
+        setTimeout(() => {
+          window.location.href = data.data;
+        }, 1000);
+      }
+    }
+
+    if (isError) toast.error(JSON.stringify(error), { id: toastId });
+  }, [data?.data, data?.message, error, isError, isLoading, isSuccess]);
   return (
     <div>
       <section>
@@ -106,27 +139,109 @@ const Checkout = () => {
                 </p>
                 <div className="mt-8 space-y-3 rounded-lg border bg-white px-2 py-4 sm:px-6">
                   {/* Product Item */}
-                  <div className="flex flex-col rounded-lg bg-white sm:flex-row">
-                    <img
-                      className="m-2 h-24 w-28 rounded-md border object-cover object-center"
-                      src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8c25lYWtlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-                      alt=""
-                    />
-                    <div className="flex w-full flex-col px-4 py-4">
-                      <span className="font-semibold">
-                        Nike Air Max Pro 8888 - Super Light
-                      </span>
-                      <span className="float-right text-gray-400">
-                        42EU - 8.5US
-                      </span>
-                      <div className="flex justify-between">
-                        <p className="mt-auto text-lg font-bold">$238.99</p>
-                        <button className="text-red-500 text-xs cursor-pointer hover:underline">
-                          Remove
-                        </button>
+                  {items?.map((cartData, idx) => (
+                    <div
+                      className="flex flex-col rounded-lg bg-white sm:flex-row"
+                      key={idx}
+                    >
+                      <img
+                        className="m-2 h-24 w-28 rounded-md border object-cover object-center"
+                        src={cartData?.imageUrl}
+                        alt=""
+                      />
+                      <div className="flex w-full flex-col px-4 py-4">
+                        <span className="font-semibold">{cartData?.name}</span>
+
+                        <div className="flex justify-between">
+                          <p className="mt-auto text-lg font-bold">
+                            ${(cartData?.quantity * cartData?.price).toFixed(2)}
+                          </p>
+                          {/* Quantity Handle */}
+                          <div className="flex items-center space-x-2">
+                            {/* Decrease Button */}
+                            <button
+                              onClick={() =>
+                                dispatch(
+                                  updateQuantity({
+                                    id: cartData.product,
+                                    quantity: Math.max(
+                                      cartData.quantity - 1,
+                                      1
+                                    ),
+                                  })
+                                )
+                              }
+                              className="bg-gray-300 hover:bg-primary p-2 rounded hover:text-white transition group"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="w-4 h-4 text-gray-700 group-hover:text-white"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M19 12H5"
+                                />
+                              </svg>
+                            </button>
+
+                            {/* Quantity Display */}
+                            <input
+                              type="text"
+                              className="w-8 p-[2px] text-center border rounded text-gray-700"
+                              // value={quantity}
+                              value={cartData.quantity}
+                              readOnly
+                            />
+
+                            {/* Increase Button */}
+                            <button
+                              onClick={() =>
+                                dispatch(
+                                  updateQuantity({
+                                    id: cartData.product,
+                                    quantity: Math.min(
+                                      cartData.quantity + 1,
+                                      cartData.stock
+                                    ),
+                                  })
+                                )
+                              }
+                              className="bg-gray-300 hover:bg-primary p-2 rounded hover:text-white transition group"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="w-4 h-4 text-gray-700 group-hover:text-white"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M12 5v14m7-7H5"
+                                />
+                              </svg>
+                            </button>
+                          </div>
+                          ;{/* Quantity Handle */}
+                          <button
+                            onClick={() =>
+                              dispatch(removeFromCart(cartData.product))
+                            }
+                            className="text-red-500 text-xs cursor-pointer hover:underline"
+                          >
+                            Remove
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  ))}
                 </div>
 
                 <p className="mt-8 text-lg font-medium">Payment Methods</p>
@@ -244,12 +359,16 @@ const Checkout = () => {
                   <div className="mt-6 flex items-center justify-between">
                     <p className="text-sm font-medium text-gray-900">Total</p>
                     <p className="text-2xl font-semibold text-gray-900">
-                      $408.00
+                      {totalPrice}BDT
                     </p>
                   </div>
                 </div>
 
-                <button className="mt-4 mb-8 w-full rounded-md bg-primary px-6 py-3 font-medium text-white">
+                <button
+                  onClick={handlePlaceOrder}
+                  className="mt-4 mb-8 w-full rounded-md bg-primary px-6 py-3 font-medium text-white disabled:bg-primary/50"
+                  disabled={totalPrice == 0 ? true : false}
+                >
                   Place Order
                 </button>
               </div>

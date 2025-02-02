@@ -5,9 +5,12 @@ import { useGetSingleBicycleQuery } from "../../redux/features/bicycle/bicycle.a
 import Loader from "../../components/Loader/Loader";
 import { useAppDispatch } from "../../redux/hooks";
 import { TProduct } from "../../types/bicycle.types";
-import { addProduct } from "../../redux/features/Checkout/Checkout.slice";
+import { toast } from "sonner";
+import { addToCart } from "../../redux/features/Checkout/Checkout.slice";
+import useGetRole from "../../hooks/useGetRole";
 
 const BiCycleDetails = () => {
+  const { userRole } = useGetRole();
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -21,8 +24,24 @@ const BiCycleDetails = () => {
     return <Loader />;
   }
   const handleCheckoutProducts = (item: TProduct) => {
-    dispatch(addProduct(item));
-    navigate("/checkout");
+    if (userRole === "admin") {
+      return toast.error("You Cannot Order Bacuase You are a Admin!");
+    }
+    if (item.stock === 0) {
+      toast.error("Out of Stock! You Cannot Order This Bicycle!");
+    } else {
+      dispatch(
+        addToCart({
+          product: item._id,
+          name: item.name,
+          price: item.price,
+          quantity: 1,
+          stock: item.stock,
+          imageUrl: item.image as string,
+        })
+      );
+      navigate("/checkout");
+    }
   };
   return (
     <MyContainer>

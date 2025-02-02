@@ -49,7 +49,7 @@ const Bicycles = () => {
           <div className=" max-w-full  mx-auto gap-4 mb-5">
             <div className="flex flex-col gap-3 justify-center items-center">
               {/* Search */}
-              <div className="flex flex-row gap-3">
+              <div className="flex flex-col md:flex-row gap-3">
                 <div className="flex gap-1">
                   <input
                     type="text"
@@ -59,24 +59,6 @@ const Bicycles = () => {
                     placeholder="Search..."
                     className="w-full rounded-md border border-overlyBg focus:border-primary bg-overlyBg focus:bg-white transition-all py-2 px-3 outline-none"
                   />
-                  <button className="bg-primary py-1 px-3 rounded-md">
-                    <svg
-                      className="w-5 h-5 text-gray-800 dark:text-white"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-width="2"
-                        d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"
-                      />
-                    </svg>
-                  </button>
                 </div>
 
                 <div className="flex gap-2">
@@ -104,7 +86,7 @@ const Bicycles = () => {
               </div>
               {/* Filter */}
               <div className="">
-                <form className="flex space-x-2">
+                <div className="flex md:flex-row flex-col space-y-2 md:space-y-0 md:space-x-2">
                   {/* Model */}
                   <select
                     name="model"
@@ -166,7 +148,7 @@ const Bicycles = () => {
                     <option value="in-stock">In Stock</option>
                     <option value="out-of-stock">Out Of Stock</option>
                   </select>
-                </form>
+                </div>
               </div>
             </div>
           </div>

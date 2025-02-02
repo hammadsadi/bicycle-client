@@ -18,7 +18,7 @@ const ProtecttedRoute = ({
   if (token) {
     user = verifyToken(token);
   }
-  if (role == undefined || role !== (user as TUser).role) {
+  if (role == undefined || role !== (user as TUser)?.role) {
     dispatch(logoutUser());
     return <Navigate to="/login" />;
   }
