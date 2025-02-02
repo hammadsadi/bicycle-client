@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { TProduct } from "../../types/bicycle.types";
 
 const BicycleCard = ({ item }: { item: TProduct }) => {
-  console.log(item);
   return (
     <Link
       to={`/bicycle/${item?._id}`}

@@ -26,3 +26,4 @@ export type TUserData = {
   updatedAt: string;
   __v: number;
 };
+

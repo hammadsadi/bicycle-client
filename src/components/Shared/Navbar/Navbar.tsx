@@ -14,6 +14,7 @@ const Navbar = () => {
   const [isFixed, setIsFixed] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isHidden, setIsHidden] = useState(false);
+  const [showMibileMenu, setShowMobileMenu] = useState(false);
   const { userRole } = useGetRole();
   const {
     data: meInfo,
@@ -97,18 +98,32 @@ const Navbar = () => {
               )}
             </nav>
             {/* Mobile Menu */}
-            <nav
-              aria-label="Global"
-              className="md:hidden absolute top-full right-2 p-2 bg-red-500  gap-2"
-            >
-              <ul className="flex flex-col justify-center items-center gap-6 text-sm ">
-                <NavBarLinks title="All Bicycles" dLink="/bicycles" />
-                <NavBarLinks title="About" dLink="/about" />
-              </ul>
-              <button className="bg-primary active:bg-primary uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150">
-                Login
-              </button>
-            </nav>
+            {showMibileMenu && (
+              <nav
+                aria-label="Global"
+                className="md:hidden flex flex-col items-center absolute top-full right-2 p-2 bg-white border rounded  gap-2"
+              >
+                <ul className="flex flex-col justify-end items-center gap-2 text-sm p-5 w-52">
+                  <NavBarLinks title="All Bicycles" dLink="/bicycles" />
+                  <NavBarLinks title="About" dLink="/about" />
+                </ul>
+                {userRole ? (
+                  <Link
+                    to="/dashboard"
+                    className="bg-primary w-fit active:bg-primary uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
+                  >
+                    Dashboard
+                  </Link>
+                ) : (
+                  <Link
+                    to="/login"
+                    className="bg-primary w-fit active:bg-primary uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
+                  >
+                    Login
+                  </Link>
+                )}
+              </nav>
+            )}
 
             {/* Dashboard Menu */}
             {userRole && (
@@ -288,7 +303,10 @@ const Navbar = () => {
             </div> */}
 
             <div className="block md:hidden">
-              <button className="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75">
+              <button
+                onClick={() => setShowMobileMenu(!showMibileMenu)}
+                className="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="size-5"

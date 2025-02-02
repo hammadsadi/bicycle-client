@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import BicycleCard from "../../components/Bicycle/BicycleCard";
+import Loader from "../../components/Loader/Loader";
 import MyContainer from "../../components/Shared/MyContainer/MyContainer";
 import MySection from "../../components/Shared/MySection/MySection";
 import {
@@ -10,28 +11,42 @@ import { TProduct, TQueryParams } from "../../types/bicycle.types";
 import { BicycleBrand, BicycleCategory } from "../../constant/global.constant";
 
 const Bicycles = () => {
+  // const [selectValue, setSelectValue] = useState({
+  //   model: "",
+  //   brand: "",
+  //   category: "",
+  //   availability: "",
+  // });
   const [params, setParams] = useState<TQueryParams[] | undefined>(undefined);
-  const { data: bicycleData } = useGetAllBicycleQuery(params);
+  const {
+    data: bicycleData,
+    isLoading,
+    isFetching,
+  } = useGetAllBicycleQuery(params);
   const { data: specificField } = useGetSpecificBicycleFieldsQuery(undefined);
+  console.log(specificField?.data);
   // Handle Filter
-  const handleChangeFilter = (
-    e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
-  ) => {
-    const { name, value } = e.target;
-    setParams((prevParams) => {
-      const updateParams = prevParams ? [...prevParams] : [];
-      const filterParams = updateParams?.filter((param) => param.name !== name);
-      // Stock Filter
-      if (name === "availability") {
-        filterParams.push({ name, value });
-      } else {
-        filterParams.push({ name, value });
-      }
+  const handleChangeFilter = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    // setSelectValue({
+    //   ...selectValue,
+    //   [e.target.name]: e.target.value,
+    // });
+    const paramsData: TQueryParams[] = [];
+    if (e.target) {
+      paramsData.push({ name: e.target.name, value: e.target.value });
 
-      return filterParams;
-    });
+      setParams((prevParams) => {
+        const updateParams = prevParams ? [...prevParams] : [];
+        updateParams.push(...paramsData);
+        return updateParams;
+      });
+    }
+
+    // console.log(selectValue);
   };
-
+  if (isLoading || isFetching) {
+    return <Loader />;
+  }
   return (
     <div>
       {/* Small Banner */}
@@ -52,10 +67,9 @@ const Bicycles = () => {
               <div className="flex flex-row gap-3">
                 <div className="flex gap-1">
                   <input
-                    type="text"
-                    id="searchTerm"
-                    name="searchTerm"
-                    onChange={handleChangeFilter}
+                    type="email"
+                    id="Email"
+                    name="email"
                     placeholder="Search..."
                     className="w-full rounded-md border border-overlyBg focus:border-primary bg-overlyBg focus:bg-white transition-all py-2 px-3 outline-none"
                   />
@@ -82,8 +96,7 @@ const Bicycles = () => {
                 <div className="flex gap-2">
                   <div>
                     <input
-                      type="number"
-                      onChange={handleChangeFilter}
+                      type="text"
                       id="minPrice"
                       name="minPrice"
                       placeholder="Min Pice"
@@ -92,9 +105,8 @@ const Bicycles = () => {
                   </div>
                   <div>
                     <input
-                      type="number"
+                      type="text"
                       id="maxPrice"
-                      onChange={handleChangeFilter}
                       name="maxPrice"
                       placeholder="Max Pice"
                       className="w-full rounded-md border border-overlyBg focus:border-primary bg-overlyBg focus:bg-white transition-all py-2 px-3 outline-none"

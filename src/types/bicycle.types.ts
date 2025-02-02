@@ -12,3 +12,9 @@ export type TProduct = {
   __v: number;
   _id: string;
 };
+
+export type TQueryParams = {
+  name: string;
+  value: string;
+};
+

@@ -5,16 +5,31 @@ export const bicycleApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     // Get All Bicycle
     getAllBicycle: builder.query({
+      query: (args) => {
+        const params = new URLSearchParams();
+        if (args) {
+          args.forEach((item: any) => {
+            params.append(item.name, item.value);
+          });
+        }
+        return {
+          url: "/bicycle",
+          method: "GET",
+          params: params,
+        };
+      },
+    }),
+    // Get Specific Field
+    getSpecificBicycleFields: builder.query({
       query: () => ({
-        url: "/bicycle",
+        url: "/bicycle/specific",
         method: "GET",
       }),
-      //   transformResponse: (response: TReduxResponse<TAcademicSemester[]>) => {
-      //     return {
-      //       data: response?.data,
-      //       meta: response?.meta,
-      //     };
-      //   },
+      transformResponse: (response: any) => {
+        return {
+          data: response?.data,
+        };
+      },
     }),
     getSingleBicycle: builder.query({
       query: (arg) => ({
@@ -38,4 +53,8 @@ export const bicycleApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllBicycleQuery, useGetSingleBicycleQuery } = bicycleApi;
+export const {
+  useGetAllBicycleQuery,
+  useGetSingleBicycleQuery,
+  useGetSpecificBicycleFieldsQuery,
+} = bicycleApi;
