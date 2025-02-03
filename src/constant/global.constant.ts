@@ -15,3 +15,5 @@ export const BicycleCategory: string[] = [
   "BMX",
   "Electric",
 ];
+
+export const OrderDeliveryStatus = ["Delivered", "Pending", "Cancel"];

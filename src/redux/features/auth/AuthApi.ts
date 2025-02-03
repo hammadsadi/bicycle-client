@@ -18,6 +18,14 @@ const authApi = baseApi.injectEndpoints({
         body: userInfo,
       }),
     }),
+    // User Info Update
+    userInfoUpdate: builder.mutation({
+      query: (userInfo) => ({
+        url: "/auth/update",
+        method: "PATCH",
+        body: userInfo,
+      }),
+    }),
     // Get Looged in User
     logedinUserGet: builder.query({
       query: () => ({
@@ -32,4 +40,5 @@ export const {
   useLoginMutation,
   useLogedinUserGetQuery,
   useUserCreateMutation,
+  useUserInfoUpdateMutation,
 } = authApi;

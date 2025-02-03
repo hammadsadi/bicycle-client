@@ -13,12 +13,23 @@ export const orderApi = baseApi.injectEndpoints({
     // Get All user Order For Admin
     getAllOrderForAdmin: builder.query({
       query: () => ({
-        url: "/order//all-orders",
+        url: "/order/all-orders",
         method: "GET",
+      }),
+    }),
+    // Get All user Order For Admin
+    updateOrderDeliveryStatus: builder.mutation({
+      query: (args) => ({
+        url: `/order/delivery/status/${args.id}`,
+        method: "PATCH",
+        body: args,
       }),
     }),
   }),
 });
 
-export const { useGetAllLogedInUserOrderQuery, useGetAllOrderForAdminQuery } =
-  orderApi;
+export const {
+  useGetAllLogedInUserOrderQuery,
+  useGetAllOrderForAdminQuery,
+  useUpdateOrderDeliveryStatusMutation,
+} = orderApi;

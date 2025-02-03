@@ -1,204 +1,173 @@
 const About = () => {
   return (
-    <div>
-      <div className="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4">
-        <p className="font-normal text-sm leading-3 text-secondary hover:text-primary cursor-pointer pb-2">
-          About
+    <div className="bg-white">
+      <header className="bg-green-500 text-white text-center py-12">
+        <h1 className="text-4xl font-bold mt-16">About Us</h1>
+      </header>
+
+      <section className="text-center py-12 px-4">
+        <h2 className="text-2xl font-bold">Mission And Values</h2>
+        <p className="mt-4 text-gray-700 max-w-2xl mx-auto">
+          Our mission is to provide exceptional healthcare services with a focus
+          on availability, reliability, and support.
         </p>
-        <div className="flex lg:flex-row flex-col lg:gap-8 sm:gap-10 gap-12">
-          <div className="w-full lg:w-6/12">
-            <h2 className="w-full font-bold lg:text-4xl text-3xl lg:leading-10 text-primary leading-9">
-              We are here to make great design accessible and delightfull for
-              everyone
-            </h2>
-            <p className="font-normal text-base leading-6 text-secondary mt-6">
-              It is a long established fact that a reader will be distracted by
-              the readable content of a page when looking at its layout. The
-              point of using Lorem Ipsum.In the first place we have granted to
-              God, and by this our present charter confirmed for us and our
-              heirs forever that the English Church shall be free, and shall
-              have her rights entire,
-            </p>
+        <div className="flex justify-center space-x-8 mt-8 animate-fadeIn">
+          <div className="transition transform hover:scale-110">
+            <h3 className="text-xl font-bold">85+</h3>
+            <p className="text-gray-700">Specialists</p>
           </div>
-          <div className="w-full lg:w-6/12">
-            <img
-              className="lg:block hidden w-full"
-              src="https://i.ibb.co/RjNH7QB/Rectangle-122-1.png"
-              alt="people discussing on board"
-            />
-            <img
-              className="lg:hidden sm:block hidden w-full"
-              src="https://i.ibb.co/16fPqrg/Rectangle-122-2.png"
-              alt="people discussing on board"
-            />
-            <img
-              className="sm:hidden block w-full"
-              src="https://i.ibb.co/Jxhpxh6/Rectangle-122.png"
-              alt="people discussing on board"
-            />
+          <div className="transition transform hover:scale-110">
+            <h3 className="text-xl font-bold">25+</h3>
+            <p className="text-gray-700">Years of Experience</p>
           </div>
         </div>
+      </section>
 
-        <div className="relative mt-24">
-          <div className="grid sm:grid-cols-3 grid-cols-2 sm:gap-8 gap-4">
-            <div className="z-20 w-12 h-12 bg-primary rounded-full flex justify-center items-center">
-              <img
-                src="https://tuk-cdn.s3.amazonaws.com/can-uploader/about-us-3-svg1.svg"
-                alt="flag"
-              />
-            </div>
+      <section className="bg-green-500 text-white py-12 px-4">
+        <h2 className="text-2xl font-bold text-center">Our Vision</h2>
+        <p className="mt-4 text-center max-w-2xl mx-auto">
+          Healthcare anytime, anywhere. We aim to revolutionize the healthcare
+          industry by making quality healthcare accessible to everyone.
+        </p>
+      </section>
 
-            <img
-              className="z-20"
-              src="https://tuk-cdn.s3.amazonaws.com/can-uploader/about-us-3-svg2.svg"
-              alt="note"
-            />
-
-            <img
-              className="z-20 sm:block hidden"
-              src="https://tuk-cdn.s3.amazonaws.com/can-uploader/about-us-3-svg3.svg"
-              alt="users"
-            />
+      <section className="text-center py-12 px-4">
+        <h2 className="text-2xl font-bold">Our Healthcare Specialties</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mt-8">
+          <div className="p-4 shadow-lg rounded-lg bg-green-100 hover:bg-green-200 transition-colors">
+            <h3 className="text-xl font-bold">Cardiology</h3>
           </div>
-          <hr className="z-10 absolute top-2/4 w-full bg-gray-200" />
+          <div className="p-4 shadow-lg rounded-lg bg-green-100 hover:bg-green-200 transition-colors">
+            <h3 className="text-xl font-bold">Neurology</h3>
+          </div>
+          <div className="p-4 shadow-lg rounded-lg bg-green-100 hover:bg-green-200 transition-colors">
+            <h3 className="text-xl font-bold">Pediatrics</h3>
+          </div>
+          <div className="p-4 shadow-lg rounded-lg bg-green-100 hover:bg-green-200 transition-colors">
+            <h3 className="text-xl font-bold">Oncology</h3>
+          </div>
         </div>
-        <div className="grid sm:grid-cols-3 grid-cols-2 sm:gap-8 gap-4">
-          <div>
-            <p className="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 text-gray-800 dark:text-white mt-6">
-              Founded
-            </p>
-            <p className="font-normal text-base leading-6 text-gray-600 dark:text-gray-200 mt-6">
-              It is a long established fact that a reader will be distracted by
-              the readable content of a page when looking at its layout.
-            </p>
-          </div>
-          <div>
-            <p className="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 text-gray-800 dark:text-white mt-6">
-              50M montly enrichments
-            </p>
-            <p className="font-normal text-base leading-6 text-gray-600 dark:text-gray-200 mt-6">
-              It is a long established fact that a reader will be distracted by
-              the readable content of a page when looking at its layout.
+      </section>
+
+      <section className="bg-gray-100 py-12 px-4">
+        <h2 className="text-2xl font-bold text-center">
+          State-Of-The-Art Technology
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8 max-w-5xl mx-auto">
+          <div className="p-4 shadow-lg rounded-lg bg-white hover:shadow-xl transition-shadow">
+            <h3 className="text-xl font-bold">Advanced Diagnostics</h3>
+            <p className="text-gray-700 mt-2">
+              We utilize the latest technology for accurate diagnostics.
             </p>
           </div>
-          <div className="sm:block hidden">
-            <p className="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 text-gray-800 dark:text-white mt-6">
-              400k User
+          <div className="p-4 shadow-lg rounded-lg bg-white hover:shadow-xl transition-shadow">
+            <h3 className="text-xl font-bold">Telemedicine</h3>
+            <p className="text-gray-700 mt-2">
+              Consult with our specialists from the comfort of your home.
             </p>
-            <p className="font-normal text-base leading-6 text-gray-600 dark:text-gray-200 mt-6">
-              It is a long established fact that a reader will be distracted by
-              the readable content of a page when looking at its layout.
+          </div>
+          <div className="p-4 shadow-lg rounded-lg bg-white hover:shadow-xl transition-shadow">
+            <h3 className="text-xl font-bold">Robotic Surgery</h3>
+            <p className="text-gray-700 mt-2">
+              Minimally invasive procedures with precision.
+            </p>
+          </div>
+          <div className="p-4 shadow-lg rounded-lg bg-white hover:shadow-xl transition-shadow">
+            <h3 className="text-xl font-bold">Electronic Health Records</h3>
+            <p className="text-gray-700 mt-2">
+              Secure and easy access to your medical records.
             </p>
           </div>
         </div>
-        <div className="sm:hidden block relative mt-8">
-          <div className="grid sm:grid-cols-3 grid-cols-2 sm:gap-8 gap-4">
-            <img
-              src="https://tuk-cdn.s3.amazonaws.com/can-uploader/about-us-3-svg3.svg"
-              alt="user"
-            />
-          </div>
-          <hr className="z-10 absolute top-2/4 w-full bg-gray-200" />
-        </div>
-        <div className="sm:hidden grid sm:grid-cols-3 grid-cols-2 sm:gap-8 gap-4">
-          <div>
-            <p className="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 text-gray-800 dark:text-white mt-6">
-              400k User
-            </p>
-            <p className="font-normal text-base leading-6 text-gray-600 dark:text-gray-200 mt-6">
-              It is a long established fact that a reader will be distracted by
-              the readable content of a page when looking at its layout.
-            </p>
-          </div>
-        </div>
+      </section>
 
-        <div className="flex lg:flex-row flex-col md:gap-14 gap-16 justify-between lg:mt-20 mt-16">
-          <div className="w-full lg:w-6/12">
-            <h2 className="font-bold lg:text-4xl text-3xl lg:leading-9 leading-7 text-gray-800 dark:text-white">
-              Our Mission
-            </h2>
-            <p className="font-normal text-base leading-6 text-gray-600 dark:text-gray-200 mt-6 w-full lg:w-10/12 xl:w-9/12">
-              It is a long established fact that a reader will be distracted by
-              the readable content of a page when looking at its layout. The
-              point of using Lorem Ipsum.In the first place we have granted to
-              God, and by this our present charter confirmed for us and our
-              heirs forever that the English Church shall be free, and shall
-              have her rights entire, and her liberties inviolate; and we will
-              that it be thus observed; which is apparent from
-            </p>
-            <p className="font-normal text-base leading-6 text-gray-600 dark:text-gray-200 w-full lg:w-10/12 xl:w-9/12 mt-10">
-              It is a long established fact that a reader will be distracted by
-              the readable content of a page when looking at its layout. The
-              point of using Lorem Ipsum.In the first place we have granted to
-              God, and by this our present charter confirmed for us and our
-              heirs forever that the English Church shall be free, and shall
-              have her rights entire, and her liberties inviolate; and we will
-              that it be thus observed; which is apparent from
-            </p>
+      <section className="text-center py-12 px-4">
+        <h2 className="text-2xl font-bold">
+          Committed To Your Health And Happiness
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mt-8">
+          <div className="p-4 shadow-lg rounded-lg bg-green-100 hover:bg-green-200 transition-colors">
+            <h3 className="text-xl font-bold">Book Appointment</h3>
           </div>
-          <div className="w-full lg:w-6/12">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 lg:gap-12 gap-10">
-              <div className="flex p-4 shadow-md">
-                <div className="mr-6">
-                  <img
-                    className="mr-6"
-                    src="https://tuk-cdn.s3.amazonaws.com/can-uploader/about-us-3-svg4.svg"
-                    alt="team card"
-                  />
-                </div>
-                <div className="">
-                  <p className="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 text-gray-800 dark:text-white">
-                    Team
-                  </p>
-                  <p className="mt-2 font-normal text-base leading-6 text-gray-600 dark:text-gray-200">
-                    It is a long established fact that a reader will be
-                    distracted by the readable content of a page when looking at
-                    its layout.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex p-4 shadow-md">
-                <div className="mr-6">
-                  <img
-                    src="https://tuk-cdn.s3.amazonaws.com/can-uploader/about-us-3-svg5.svg"
-                    alt="board card"
-                  />
-                </div>
-                <div className="">
-                  <p className="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 text-gray-800 dark:text-white">
-                    Board
-                  </p>
-                  <p className="mt-2 font-normal text-base leading-6 text-gray-600 dark:text-gray-200">
-                    It is a long established fact that a reader will be
-                    distracted by the readable content of a page when looking at
-                    its layout.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex p-4 shadow-md">
-                <div className="mr-6">
-                  <img
-                    src="https://tuk-cdn.s3.amazonaws.com/can-uploader/about-us-3-svg6.svg"
-                    alt="press card"
-                  />
-                </div>
-                <div className="">
-                  <p className="font-semibold lg:text-2xl text-xl lg:leading-6 leading-5 text-gray-800 dark:text-white">
-                    Press
-                  </p>
-                  <p className="mt-2 font-normal text-base leading-6 text-gray-600 dark:text-gray-200">
-                    It is a long established fact that a reader will be
-                    distracted by the readable content of a page when looking at
-                    its layout.
-                  </p>
-                </div>
-              </div>
-            </div>
+          <div className="p-4 shadow-lg rounded-lg bg-green-100 hover:bg-green-200 transition-colors">
+            <h3 className="text-xl font-bold">Informed Staff</h3>
+          </div>
+          <div className="p-4 shadow-lg rounded-lg bg-green-100 hover:bg-green-200 transition-colors">
+            <h3 className="text-xl font-bold">Total Health</h3>
+          </div>
+          <div className="p-4 shadow-lg rounded-lg bg-green-100 hover:bg-green-200 transition-colors">
+            <h3 className="text-xl font-bold">Get Consultation</h3>
           </div>
         </div>
-      </div>
+      </section>
+
+      <section className="bg-green-500 text-white text-center py-12 px-4">
+        <h2 className="text-2xl font-bold">Patient Testimonials</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8 max-w-5xl mx-auto">
+          <div className="p-4 shadow-lg rounded-lg bg-green-600 hover:bg-green-500 transition-colors">
+            <p>
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
+              sit amet tristique mi."
+            </p>
+            <h3 className="mt-4 font-bold">- Patient A</h3>
+          </div>
+          <div className="p-4 shadow-lg rounded-lg bg-green-600 hover:bg-green-500 transition-colors">
+            <p>
+              "Nullam ac augue eget diam posuere vehicula. Vivamus quis nulla ac
+              justo euismod posuere."
+            </p>
+            <h3 className="mt-4 font-bold">- Patient B</h3>
+          </div>
+          <div className="p-4 shadow-lg rounded-lg bg-green-600 hover:bg-green-500 transition-colors">
+            <p>
+              "Fusce tincidunt, arcu nec vestibulum tincidunt, eros massa
+              ullamcorper urna."
+            </p>
+            <h3 className="mt-4 font-bold">- Patient C</h3>
+          </div>
+        </div>
+      </section>
+
+      <section className="text-center py-12 px-4 w-full">
+        <h2 className="text-2xl font-bold">
+          Get Answer To Your Most Asked Questions
+        </h2>
+        <div className="mt-8">
+          <div className="p-4 border rounded-lg shadow-md transition transform hover:scale-100 scale-90">
+            <h3 className="text-xl font-bold">
+              How do I make an appointment online?
+            </h3>
+            <p className="mt-2 text-gray-700">
+              You can book an appointment online through our website or mobile
+              app.
+            </p>
+          </div>
+          <div className="p-4 border rounded-lg shadow-md transition transform hover:scale-100 scale-90 mt-4">
+            <h3 className="text-xl font-bold">
+              What types of medical tests do you offer?
+            </h3>
+            <p className="mt-2 text-gray-700">
+              We offer a wide range of medical tests including blood tests,
+              imaging, and more.
+            </p>
+          </div>
+          <div className="p-4 border rounded-lg shadow-md transition transform hover:scale-100 scale-90 mt-4">
+            <h3 className="text-xl font-bold">
+              Do you accept insurance plans?
+            </h3>
+            <p className="mt-2 text-gray-700">
+              Yes, we accept most major insurance plans.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <footer className="bg-green-500 text-white text-center py-8">
+        <p>
+          &copy; Copyright [Your Name] . All rights reserved. Made By Binary
+          Boats⛵
+        </p>
+      </footer>
     </div>
   );
 };
