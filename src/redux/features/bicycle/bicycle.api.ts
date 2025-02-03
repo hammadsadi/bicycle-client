@@ -43,12 +43,29 @@ export const bicycleApi = baseApi.injectEndpoints({
         };
       },
     }),
-    // Create New Academic Faculty
+    // Create New Bicycle
     addBicycle: builder.mutation({
       query: (data) => ({
         url: "/bicycle",
         method: "POST",
         body: data,
+      }),
+      invalidatesTags: ["bicycle"],
+    }),
+    // Update Bicycle
+    updateBicycle: builder.mutation({
+      query: (arg) => ({
+        url: `/bicycle/${arg?.id}`,
+        method: "PATCH",
+        body: arg?.data,
+      }),
+      invalidatesTags: ["bicycle"],
+    }),
+    // Delete Bicycle
+    deleteBicycle: builder.mutation({
+      query: (id) => ({
+        url: `/bicycle/${id}`,
+        method: "DELETE",
       }),
       invalidatesTags: ["bicycle"],
     }),
@@ -60,4 +77,6 @@ export const {
   useGetSingleBicycleQuery,
   useGetSpecificBicycleFieldsQuery,
   useAddBicycleMutation,
+  useUpdateBicycleMutation,
+  useDeleteBicycleMutation,
 } = bicycleApi;

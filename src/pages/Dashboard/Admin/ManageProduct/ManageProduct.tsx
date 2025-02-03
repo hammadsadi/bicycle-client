@@ -29,6 +29,7 @@ const ProductManage = () => {
     productDetails: "",
     stock: "",
   });
+  // Modal Close
   const close = () => {
     setIsOpen(false);
   };
@@ -76,18 +77,18 @@ const ProductManage = () => {
       price: Number(formValue.price),
       stock: Number(formValue.stock),
     };
-    console.log(typeof data.price);
-    console.log(typeof data.stock);
+
     const res = await addBicycle(data);
-    console.log(res);
     if (res?.data) {
       toast.success("Data Created Successful", { id: toastId });
+      setIsOpen(false);
     } else {
       toast.error("Something Went Wrong", { id: toastId });
     }
   };
   return (
     <div>
+      {/* Add Bicycle Modal */}
       <MyModal close={close} isOpen={isOpen}>
         <div>
           <h2 className="text-lg text-center md:text-xl font-bold">

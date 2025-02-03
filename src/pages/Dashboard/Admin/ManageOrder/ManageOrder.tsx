@@ -13,10 +13,10 @@ const OrderManage = () => {
         <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
           <thead className="ltr:text-left rtl:text-right">
             <tr>
-              <TableTh tHeading="Image" />
-              <TableTh tHeading=" Name" />
-              <TableTh tHeading="Email" />
-              <TableTh tHeading="  Action" />
+              <TableTh tHeading="Total Price" />
+              <TableTh tHeading=" Payment Status" />
+              <TableTh tHeading="Delivery Status" />
+              <TableTh tHeading=" Action" />
             </tr>
           </thead>
 
