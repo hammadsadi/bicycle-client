@@ -6,7 +6,6 @@ import { TProduct } from "../../../types/bicycle.types";
 
 const ProductLisItem = () => {
   const { data: products } = useGetAllBicycleQuery(undefined);
-  console.log(products?.data);
   return (
     <>
       {products?.data?.map((item: TProduct) => (

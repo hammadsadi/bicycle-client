@@ -10,7 +10,7 @@ const uploadImage = async (image: any) => {
     "cloud_name",
     import.meta.env.VITE_REACT_APP_CLOUDINARY_CLOUD_NAME
   );
-  data.append("folder", "Cloudinary-React");
+  // data.append("folder", "Cloudinary-React");
 
   try {
     const response = await fetch(
@@ -23,8 +23,7 @@ const uploadImage = async (image: any) => {
       }
     );
     const res = await response.json();
-    console.log(res);
-    return res.public_id;
+    return res.secure_url;
   } catch (error: any) {
     console.log(error);
   }

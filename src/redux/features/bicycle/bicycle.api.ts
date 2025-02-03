@@ -18,6 +18,7 @@ export const bicycleApi = baseApi.injectEndpoints({
           params: params,
         };
       },
+      providesTags: ["bicycle"],
     }),
     // Get Specific Field
     getSpecificBicycleFields: builder.query({
@@ -43,13 +44,14 @@ export const bicycleApi = baseApi.injectEndpoints({
       },
     }),
     // Create New Academic Faculty
-    // addAcademicFaculty: builder.mutation({
-    //   query: (data) => ({
-    //     url: "/academic-faculties/create-academic-faculty",
-    //     method: "POST",
-    //     body: data,
-    //   }),
-    // }),
+    addBicycle: builder.mutation({
+      query: (data) => ({
+        url: "/bicycle",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["bicycle"],
+    }),
   }),
 });
 
@@ -57,4 +59,5 @@ export const {
   useGetAllBicycleQuery,
   useGetSingleBicycleQuery,
   useGetSpecificBicycleFieldsQuery,
+  useAddBicycleMutation,
 } = bicycleApi;
