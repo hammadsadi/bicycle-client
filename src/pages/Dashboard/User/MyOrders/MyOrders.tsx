@@ -11,7 +11,6 @@ const MyOrders = () => {
               <TableTh tHeading="Total Price" />
               <TableTh tHeading=" Payment Status" />
               <TableTh tHeading="Delivery Status" />
-              <TableTh tHeading="Payment Verify" />
             </tr>
           </thead>
 

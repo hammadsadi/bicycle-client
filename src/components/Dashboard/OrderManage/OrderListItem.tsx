@@ -9,6 +9,7 @@ import { OrderDeliveryStatus } from "../../../constant/global.constant";
 import { ChangeEvent } from "react";
 import { toast } from "sonner";
 import { RiDeleteBin5Fill } from "react-icons/ri";
+import clsx from "clsx";
 
 const OrderLisItem = () => {
   const { data: allOrders } = useGetAllOrderForAdminQuery(undefined);
@@ -44,9 +45,30 @@ const OrderLisItem = () => {
       {allOrders?.data?.map((item: any) => (
         <tr className="odd:bg-gray-50" key={item?._id}>
           <TableTd tdHeading={item?.totalPrice} />
-          <TableTd tdHeading={item?.status} />
-          <TableTd tdHeading={item?.deliveryStatus} />
-
+          <td className="whitespace-nowrap px-4 py-2 text-base font-medium text-gray-800">
+            <span
+              className={clsx(
+                "py-1 px-2 inline-block text-sm rounded",
+                item.status === "Pending" && "bg-yellow-400 text-black",
+                item.status === "Cancelled" && "bg-red-600 text-white",
+                item.status === "Paid" && "bg-primary text-white"
+              )}
+            >
+              {item?.status}
+            </span>
+          </td>
+          <td className="whitespace-nowrap px-4 py-2 text-base font-medium text-gray-800">
+            <span
+              className={clsx(
+                "py-1 px-2 inline-block text-sm rounded",
+                item.deliveryStatus === "Pending" && "bg-yellow-400 text-black",
+                item.deliveryStatus === "Cancel" && "bg-red-600 text-white",
+                item.deliveryStatus === "Delivered" && "bg-primary text-white"
+              )}
+            >
+              {item?.deliveryStatus}
+            </span>
+          </td>
           <td className="whitespace-nowrap px-4 py-2 text-base font-medium text-gray-800">
             <div className="space-x-1 flex items-center justify-center">
               <div className="space-y-1 text-sm">

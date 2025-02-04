@@ -21,6 +21,9 @@ const Login = () => {
       email: getInputValue({ targetEvent: event, fieldName: "email" }),
       password: getInputValue({ targetEvent: event, fieldName: "password" }),
     };
+    if (!userInfo.email || !userInfo.password) {
+      return toast.error("All Fields Are Required", { id: toastId });
+    }
     const res = await loginUser(userInfo);
     if (res?.error) {
       return toast.error("Invalid Credentials", { id: toastId });
