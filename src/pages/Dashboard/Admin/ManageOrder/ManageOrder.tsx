@@ -1,7 +1,13 @@
 import OrderLisItem from "../../../../components/Dashboard/OrderManage/OrderListItem";
+import Loader from "../../../../components/Loader/Loader";
 import TableTh from "../../../../components/Shared/Table/TableTh";
+import { useGetAllOrderForAdminQuery } from "../../../../redux/features/order/orderApi";
 
 const OrderManage = () => {
+  const { isLoading, isFetching } = useGetAllOrderForAdminQuery(undefined);
+  if (isFetching || isLoading) {
+    return <Loader />;
+  }
   return (
     <div>
       <div className="mb-1 flex justify-end">

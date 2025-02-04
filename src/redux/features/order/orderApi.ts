@@ -35,6 +35,14 @@ export const orderApi = baseApi.injectEndpoints({
         params: { orderId },
       }),
     }),
+    // Get All user Order For Admin
+    deleteOrder: builder.mutation({
+      query: (args) => ({
+        url: `/order/delete/${args.orderId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["verifyOrder"],
+    }),
   }),
 });
 
@@ -43,4 +51,5 @@ export const {
   useGetAllOrderForAdminQuery,
   useUpdateOrderDeliveryStatusMutation,
   useVerifyOrderQuery,
+  useDeleteOrderMutation,
 } = orderApi;

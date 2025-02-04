@@ -15,12 +15,8 @@ const Login = () => {
   const navigate = useNavigate();
   const handleLogin = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // const form = event.target as HTMLFormElement;
-    // const emailInput = form?.elements.namedItem("email") as HTMLInputElement;
-    // const passwordInput = form?.elements.namedItem(
-    //   "password"
-    // ) as HTMLInputElement;
-    const toastId = toast.loading("Please Wait..");
+
+    const toastId = "Please Wait..";
     const userInfo: ILogin = {
       email: getInputValue({ targetEvent: event, fieldName: "email" }),
       password: getInputValue({ targetEvent: event, fieldName: "password" }),

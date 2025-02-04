@@ -12,12 +12,15 @@ import {
 } from "../../../../constant/global.constant";
 import {
   useAddBicycleMutation,
+  useGetAllBicycleQuery,
   useGetSpecificBicycleFieldsQuery,
 } from "../../../../redux/features/bicycle/bicycle.api";
+import Loader from "../../../../components/Loader/Loader";
 
 const ProductManage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { data: specificField } = useGetSpecificBicycleFieldsQuery(undefined);
+  const { isFetching, isLoading } = useGetAllBicycleQuery(undefined);
   const [addBicycle] = useAddBicycleMutation();
   const [formValue, setFormValue] = useState({
     name: "",
@@ -58,7 +61,7 @@ const ProductManage = () => {
   };
 
   const handleForm = async (e: React.FormEvent) => {
-    const toastId = toast.loading("Creating...");
+    const toastId = "Creating...";
     e.preventDefault();
     if (
       !formValue.brand ||
@@ -86,6 +89,10 @@ const ProductManage = () => {
       toast.error("Something Went Wrong", { id: toastId });
     }
   };
+
+  if (isFetching || isLoading) {
+    return <Loader />;
+  }
   return (
     <div>
       {/* Add Bicycle Modal */}

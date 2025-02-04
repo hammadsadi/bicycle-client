@@ -1,7 +1,14 @@
 import UserLisItem from "../../../../components/Dashboard/UserManage/UserList";
+import Loader from "../../../../components/Loader/Loader";
 import TableTh from "../../../../components/Shared/Table/TableTh";
+import { useGetAllUserQuery } from "../../../../redux/features/admin/userManage.api";
 
 const UserManage = () => {
+   const { isFetching, isLoading } = useGetAllUserQuery(undefined);
+
+   if (isFetching || isLoading) {
+     return <Loader />;
+   }
   return (
     <div>
       <div className="overflow-x-auto">

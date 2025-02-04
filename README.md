@@ -1,50 +1,63 @@
-# React + TypeScript + Vite
+# 🚲 Bicycle Haven
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a Bicycle Haven Application designed to manage a bicycle store. In this aplication enables users to purchase Nicycle, place orders, and Complete Payment Using Shurjo Pay
 
-Currently, two official plugins are available:
+## [ Live Site URL](https://bicycle-haven.vercel.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Click here for the Client Live Site: [https://bicycle-haven.vercel.app](https://bicycle-haven.vercel.app)
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## 🚀 Features
+1. **Order Bicycles:** Users can place orders with Product Details Like Quantity, Total Price, and User Info.
+2. **Order Update:** User Can Update Cart Product like Quantity and User can Order Multiple Products.
+3. **Payment System:** User Can pay Using ShurjoPay Payment Gateway.
+4. **Profile Manage:** User Can Update Personal her Information.
 
-- Configure the top-level `parserOptions` property like this:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 🧑‍💻 Usegaes Technologies
+- React Js
+- Tailwind CSS
+- Redux Toolkit
+- Framer Motion"
+
+
+## 🛠️ Installation and Setup
+
+Follow these steps to set up the project locally:
+
+1. Clone the repository:
+
+   ```bash
+   git clone <repository-url>
+   cd <project-folder>
+   ```
+
+2.Install the required dependencies:
+
+```bash
+npm install
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+3. Create a .env file in the root directory and configure the following environment variables:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+ VITE_REACT_APP_CLOUDINARY_CLOUD_NAME=<your_cloudinary_cloud_name>
+VITE_REACT_APP_CLOUDINARY_API_KEY=<your_Cloudinary_api_key>
+VITE_REACT_APP_CLOUDINARY_API_SECRET=<your_Cloudinary_api_secret>
+VITE_REACT_APP_CLOUDINARY_UPLOAD_PRESET=<your_Cloudinary_upload_secret>
 ```
+NB: If you want to change API_BASE_URL please go to redux folder > api > baseApi.ts then You can Change it.
+
+4. Start the Client:
+
+```bash
+ npm run dev
+```
+
+5. The API will be available at
+
+```bash
+http://localhost:5173
+```
+
+

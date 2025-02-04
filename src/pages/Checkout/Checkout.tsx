@@ -403,7 +403,7 @@ const Checkout = () => {
                   className="mt-4 mb-8 w-full rounded-md bg-primary px-6 py-3 font-medium text-white disabled:bg-primary/50"
                   disabled={totalPrice == 0 ? true : false}
                 >
-                  Place Order
+                  Order Now
                 </button>
               </div>
             </div>

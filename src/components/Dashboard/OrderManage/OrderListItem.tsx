@@ -1,17 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import TableTd from "../../Shared/Table/TableTd";
 import {
+  useDeleteOrderMutation,
   useGetAllOrderForAdminQuery,
   useUpdateOrderDeliveryStatusMutation,
 } from "../../../redux/features/order/orderApi";
 import { OrderDeliveryStatus } from "../../../constant/global.constant";
 import { ChangeEvent } from "react";
 import { toast } from "sonner";
+import { RiDeleteBin5Fill } from "react-icons/ri";
 
 const OrderLisItem = () => {
   const { data: allOrders } = useGetAllOrderForAdminQuery(undefined);
   const [updateDeliveryStatus] = useUpdateOrderDeliveryStatusMutation();
-
+  const [deleteOrder] = useDeleteOrderMutation();
   // Handle Delivery Status
   const handleDeliveryStatus = async (
     e: ChangeEvent<HTMLSelectElement>,
@@ -25,6 +27,16 @@ const OrderLisItem = () => {
       toast.success(res?.data?.message);
     } else {
       toast.error("Something Went Wrong!");
+    }
+  };
+
+  const handleOrderDelete = async (id: string) => {
+    const deleteOrderId = toast.loading("Deleting...");
+    const res = await deleteOrder({ orderId: id });
+    if (res?.data) {
+      toast.success(res?.data?.message, { id: deleteOrderId });
+    } else {
+      toast.error("Order Deleted Failed!", { id: deleteOrderId });
     }
   };
   return (
@@ -51,6 +63,12 @@ const OrderLisItem = () => {
                   ))}
                 </select>
               </div>
+              <button
+                onClick={() => handleOrderDelete(item?._id)}
+                className="bg-rose-600 text-white p-1 rounded-sm cursor-pointer"
+              >
+                <RiDeleteBin5Fill />
+              </button>
             </div>
           </td>
         </tr>
