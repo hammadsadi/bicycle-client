@@ -65,6 +65,7 @@ const Navbar = () => {
   // Handle User Logout
   const handleLogout = () => {
     dispatch(logoutUser());
+    setDashboardMenuOpen(false);
   };
 
   if (isFetching || isLoading) {
@@ -181,13 +182,6 @@ const Navbar = () => {
                         )}
                         {userRole === "customer" && (
                           <>
-                            <Link
-                              to="/dashboard/my-orders"
-                              className="block rounded-lg px-4 py-2 text-sm text-secondary hover:bg-primary hover:text-white"
-                              role="menuitem"
-                            >
-                              Dashboard
-                            </Link>
                             <Link
                               to="dashboard/my-orders"
                               className="block rounded-lg px-4 py-2 text-sm text-secondary hover:bg-primary hover:text-white"

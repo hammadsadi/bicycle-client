@@ -43,6 +43,7 @@ const Checkout = () => {
 
     if (isError) toast.error(JSON.stringify(error), { id: toastId });
   }, [data?.data, data?.message, error, isError, isLoading, isSuccess]);
+  console.log(items);
   return (
     <div>
       <section>
@@ -50,7 +51,7 @@ const Checkout = () => {
           <MySection>
             <div className="flex flex-col items-center border-b bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32">
               <a href="#" className="text-2xl font-bold text-gray-800">
-                sneekpeeks
+                Cart List
               </a>
               <div className="mt-4 py-2 text-xs sm:mt-0 sm:ml-auto sm:text-base">
                 <div className="relative">
@@ -199,7 +200,7 @@ const Checkout = () => {
                             />
 
                             {/* Increase Button */}
-                            <button
+                            {/* <button
                               onClick={() =>
                                 dispatch(
                                   updateQuantity({
@@ -211,6 +212,39 @@ const Checkout = () => {
                                   })
                                 )
                               }
+                              className="bg-gray-300 hover:bg-primary p-2 rounded hover:text-white transition group"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="w-4 h-4 text-gray-700 group-hover:text-white"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M12 5v14m7-7H5"
+                                />
+                              </svg>
+                            </button> */}
+                            <button
+                              onClick={() => {
+                                if (cartData.quantity + 1 > cartData.stock) {
+                                  toast.error("Insufficient Stock!");
+                                } else {
+                                  dispatch(
+                                    updateQuantity({
+                                      id: cartData?.product,
+                                      quantity: Math.min(
+                                        cartData?.quantity + 1,
+                                        cartData?.stock
+                                      ),
+                                    })
+                                  );
+                                }
+                              }}
                               className="bg-gray-300 hover:bg-primary p-2 rounded hover:text-white transition group"
                             >
                               <svg

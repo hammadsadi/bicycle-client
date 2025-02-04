@@ -114,22 +114,21 @@ const Footer = () => {
             </div>
 
             <div>
-              <FooterHeading title="Helpful Links" />
-
-              <ul className="mt-6 space-y-4 text-sm">
-                <FooterLink fLink="#" fTitle="FAQs" />
-                <FooterLink fLink="#" fTitle="Shipping & Delivery" />
-                <FooterLink fLink="#" fTitle=" Return & Refund Policy" />
-              </ul>
-            </div>
-
-            <div>
               <FooterHeading title="Legal" />
 
               <ul className="mt-6 space-y-4 text-sm">
                 <FooterLink fLink="#" fTitle="Terms & Conditions" />
                 <FooterLink fLink="#" fTitle="Privacy Policy" />
                 <FooterLink fLink="#" fTitle="Cookie Policy" />
+              </ul>
+            </div>
+            <div>
+              <FooterHeading title="Contact Info" />
+
+              <ul className="mt-6 space-y-4 text-sm">
+                <FooterLink fLink="#" fTitle="bicyclehaben@info.com" />
+                <FooterLink fLink="#" fTitle="+8801760170010" />
+                <FooterLink fLink="#" fTitle=" 0987865456465" />
               </ul>
             </div>
           </div>
