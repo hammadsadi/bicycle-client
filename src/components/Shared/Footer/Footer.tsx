@@ -96,9 +96,9 @@ const Footer = () => {
               <FooterHeading title="Services" />
 
               <ul className="mt-6 space-y-4 text-sm">
-                <FooterLink fLink="#" fTitle="Sell" />
-                <FooterLink fLink="#" fTitle=" Company Review" />
-                <FooterLink fLink="#" fTitle="  Accounts Review" />
+                <FooterLink fLink="/" fTitle="Bike Repair & Maintenance" />
+                <FooterLink fLink="/" fTitle=" Custom Bike Orders" />
+                <FooterLink fLink="/" fTitle="Trade-in Program" />
               </ul>
             </div>
 
@@ -106,9 +106,10 @@ const Footer = () => {
               <FooterHeading title="Company" />
 
               <ul className="mt-6 space-y-4 text-sm">
-                <FooterLink fLink="#" fTitle="Sell" />
-                <FooterLink fLink="#" fTitle=" Company Review" />
-                <FooterLink fLink="#" fTitle="  Accounts Review" />
+                <FooterLink fLink="#" fTitle="About Us" />
+                <FooterLink fLink="#" fTitle="Our Team" />
+                <FooterLink fLink="#" fTitle="Careers" />
+                <FooterLink fLink="#" fTitle="Press & Media" />
               </ul>
             </div>
 
@@ -116,9 +117,9 @@ const Footer = () => {
               <FooterHeading title="Helpful Links" />
 
               <ul className="mt-6 space-y-4 text-sm">
-                <FooterLink fLink="#" fTitle="Sell" />
-                <FooterLink fLink="#" fTitle=" Company Review" />
-                <FooterLink fLink="#" fTitle="  Accounts Review" />
+                <FooterLink fLink="#" fTitle="FAQs" />
+                <FooterLink fLink="#" fTitle="Shipping & Delivery" />
+                <FooterLink fLink="#" fTitle=" Return & Refund Policy" />
               </ul>
             </div>
 
@@ -126,15 +127,15 @@ const Footer = () => {
               <FooterHeading title="Legal" />
 
               <ul className="mt-6 space-y-4 text-sm">
-                <FooterLink fLink="#" fTitle="Sell" />
-                <FooterLink fLink="#" fTitle=" Company Review" />
-                <FooterLink fLink="#" fTitle="  Accounts Review" />
+                <FooterLink fLink="#" fTitle="Terms & Conditions" />
+                <FooterLink fLink="#" fTitle="Privacy Policy" />
+                <FooterLink fLink="#" fTitle="Cookie Policy" />
               </ul>
             </div>
           </div>
 
           <p className="text-xs text-overlyBg/50">
-            &copy; 2022. Company Name. All rights reserved.
+            &copy; 2025. Bicycle Haven. All rights reserved.
           </p>
         </div>
       </MyContainer>

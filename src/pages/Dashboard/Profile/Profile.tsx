@@ -65,6 +65,7 @@ const Profile = () => {
         : loginUserInfo?.data?.address,
       city: formValue?.city ? formValue.city : loginUserInfo?.data?.city,
     };
+    console.log("Submit", updatedUserData);
     const res = await updateUserInfo(updatedUserData);
     if (res?.data) {
       refetch();

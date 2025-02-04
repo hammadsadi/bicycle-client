@@ -25,6 +25,14 @@ export const orderApi = baseApi.injectEndpoints({
         body: args,
       }),
     }),
+    // Verify Order
+    verifyOrder: builder.query({
+      query: (orderId) => ({
+        url: "/order/verify",
+        method: "GET",
+        params: { orderId },
+      }),
+    }),
   }),
 });
 
@@ -32,4 +40,5 @@ export const {
   useGetAllLogedInUserOrderQuery,
   useGetAllOrderForAdminQuery,
   useUpdateOrderDeliveryStatusMutation,
+  useVerifyOrderQuery,
 } = orderApi;

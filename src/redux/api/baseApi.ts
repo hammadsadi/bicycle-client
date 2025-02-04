@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `${import.meta.env.VITE_API_BASE_URL}`,
+    baseUrl: "https://bi-cycle-store.vercel.app/api/v1",
     credentials: "include",
     prepareHeaders: (headers) => {
       // Get Token From Redux State
