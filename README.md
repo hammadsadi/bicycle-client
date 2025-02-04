@@ -17,6 +17,7 @@ Click here for the Client Live Site: [https://bicycle-haven.vercel.app](https://
 ## 🧑‍💻 Usegaes Technologies
 - React Js
 - Tailwind CSS
+- Typescript
 - Redux Toolkit
 - Framer Motion"
 
