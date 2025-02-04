@@ -16,6 +16,7 @@ export const orderApi = baseApi.injectEndpoints({
         url: "/order/all-orders",
         method: "GET",
       }),
+      providesTags: ["verifyOrder"],
     }),
     // Get All user Order For Admin
     updateOrderDeliveryStatus: builder.mutation({
@@ -24,6 +25,7 @@ export const orderApi = baseApi.injectEndpoints({
         method: "PATCH",
         body: args,
       }),
+      invalidatesTags: ["verifyOrder"],
     }),
     // Verify Order
     verifyOrder: builder.query({

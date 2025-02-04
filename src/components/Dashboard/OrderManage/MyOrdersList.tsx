@@ -7,10 +7,12 @@ import {
 import { useSearchParams } from "react-router-dom";
 
 const MyOrderLis = () => {
-  const { data: orders } = useGetAllLogedInUserOrderQuery(undefined);
+  const { data: orders, refetch } = useGetAllLogedInUserOrderQuery(undefined);
   const [searchParams] = useSearchParams();
-  const { isFetching } = useVerifyOrderQuery(searchParams.get("order_id"));
-  console.log(isFetching);
+  const { isSuccess } = useVerifyOrderQuery(searchParams.get("order_id"));
+  if (isSuccess) {
+    refetch();
+  }
   return (
     <>
       {orders?.data?.map((data: any) => (
