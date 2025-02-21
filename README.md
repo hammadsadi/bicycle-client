@@ -1,6 +1,6 @@
 # 🚲 Bicycle Haven
 
-This is a Bicycle Haven Application designed to manage a bicycle store. In this aplication enables users to purchase Nicycle, place orders, and Complete Payment Using Shurjo Pay
+Bicycle Haven is an e-commerce application designed to manage a bicycle store. It allows users to browse bicycles, place orders, and complete payments securely using the ShurjoPay payment gateway.
 
 ## [ Live Site URL](https://bicycle-haven.vercel.app)
 
@@ -8,10 +8,10 @@ Click here for the Client Live Site: [https://bicycle-haven.vercel.app](https://
 
 
 ## 🚀 Features
-1. **Order Bicycles:** Users can place orders with Product Details Like Quantity, Total Price, and User Info.
-2. **Order Update:** User Can Update Cart Product like Quantity and User can Order Multiple Products.
-3. **Payment System:** User Can pay Using ShurjoPay Payment Gateway.
-4. **Profile Manage:** User Can Update Personal her Information.
+1. **Order Bicycles:** Users can select quantity, view total price, and provide order details.
+2. **Order Update:** Users can update cart items and order multiple products.
+3. **Payment System:** Integrated ShurjoPay for seamless transactions.
+4. **Profile Manage:** Users can update personal information.
 
 
 ## 🧑‍💻 Usegaes Technologies
